@@ -1,7 +1,7 @@
+<template>
+  <router-view></router-view>
+</template>
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from "./components/HelloWorld.vue";
 // console.log('process.env: ', process.env.NODE_ENV); // process.env:  development
 // console.log('import.meta: ', import.meta.env)
 /**
@@ -15,29 +15,6 @@ import HelloWorld from "./components/HelloWorld.vue";
   }
  */
 </script>
-
-<template>
-  <n-carousel>
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-    />
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-    />
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-    />
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-    />
-  </n-carousel>
-  <HelloWorld msg="Vite + Vue" />
-</template>
-
 <style scoped>
 .logo {
   height: 6em;

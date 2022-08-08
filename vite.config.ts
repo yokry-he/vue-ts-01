@@ -41,8 +41,10 @@ export default defineConfig(({command, mode, ssrBuild, ...others}) => {
         '@': getPath('./src'),
         '@assets': getPath('./src/assets'),
         '@comps': getPath('./src/components'),
-        '@views': getPath('./src/components/views'),
-        '@utils': getPath('./src/components/utils'),
+        '@views': getPath('./src/views'),
+        '@utils': getPath('./src/utils'),
+        '@router': getPath('./src/router/index'),
+
       }
     },
     // css: {
