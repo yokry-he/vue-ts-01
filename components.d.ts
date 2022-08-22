@@ -8,11 +8,15 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    ImgPreview: typeof import('./src/components/img-preview/index.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NCarousel: typeof import('naive-ui')['NCarousel']
+    NModal: typeof import('naive-ui')['NModal']
+    NSlider: typeof import('naive-ui')['NSlider']
     NSpace: typeof import('naive-ui')['NSpace']
     NText: typeof import('naive-ui')['NText']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScrollText: typeof import('./src/components/scroll-text/index.vue')['default']
   }
 }

@@ -1,8 +1,25 @@
 {
   "name": "vue-ts-01",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "A project that to test vue3 and typescript",
+  "author": {
+    "name": "Yokry",
+    "email": "1181354012@qq.com",
+    "url": "https://github.com/lieyankui/vue-ts-01"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "Vite3",
+    "Vite",
+    "TypeScript",
+    "TS",
+    "NaiveUI",
+    "naive-ui",
+    "UnoCSS"
+  ],
   "scripts": {
     "dev": "vite --mode dev",
     "build:stage": "vue-tsc --noEmit && vite build --mode stage",
@@ -10,10 +27,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "color": "^4.2.3",
+    "color-convert": "^2.0.1",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },
   "devDependencies": {
+    "@types/color": "^3.0.3",
+    "@types/color-convert": "^2.0.0",
     "@types/node": "^18.6.4",
     "@vitejs/plugin-vue": "^3.0.0",
     "naive-ui": "^2.32.1",

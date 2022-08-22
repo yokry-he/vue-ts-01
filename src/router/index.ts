@@ -8,7 +8,7 @@ export const routes = [
   },
   { path: "/", redirect: "profile" },
 ];
-// @ts-ignore
+
 const router: Router = createRouter({
   history: createWebHashHistory(),
   routes,
