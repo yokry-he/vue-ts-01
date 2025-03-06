@@ -1,15 +1,17 @@
 <template>
   <div class="image-preview-mask" @click="close" v-if="show">
-    <div class="image-preview-toolbar">
+    <div class="image-preview-icon-close">
+      <CloseOutlined />
     </div>
     <div class="image-preview-content" :class="[show ? 'image-preview-content-show' : '']">
-      <img :src="url" alt="" />
+      <img :src="url" alt="加载中..." />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, watch } from "vue";
+import { CloseOutlined } from '@ant-design/icons-vue';
 const emit = defineEmits(['update:show']);
 const props = defineProps<{ url: string, show: boolean }>();
 function close() {
@@ -20,34 +22,35 @@ function close() {
 <style scoped lang="scss">
 .image-preview-mask {
   position: fixed;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.35);
 
-  .image-preview-icon-close {}
+  .image-preview-icon-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 
   .image-preview-content {
     position: absolute;
     left: 0;
+    right: 0;
     top: 0;
-    width: 0;
-    height: 0;
-    transition: all 0.5s ease-in;
-
+    bottom: 0;
+    margin: auto;
+    max-width: 80%;
+    max-height: 80%;
     img {
       display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    &.image-preview-content-show {
+      margin: auto;
       width: auto;
       height: auto;
-      max-width: 80%;
-      max-height: 80%;
-      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 

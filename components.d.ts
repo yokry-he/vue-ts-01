@@ -7,14 +7,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    DragCard: typeof import('./src/components/drag-temp/drag-card.vue')['default']
+    DragTemp: typeof import('./src/components/drag-temp/index.vue')['default']
+    FreeLayout: typeof import('./src/components/free-layout/index.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     ImgPreview: typeof import('./src/components/img-preview/index.vue')['default']
+    LayoutItem: typeof import('./src/components/free-layout/layout-item.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
-    NCarousel: typeof import('naive-ui')['NCarousel']
-    NModal: typeof import('naive-ui')['NModal']
     NSlider: typeof import('naive-ui')['NSlider']
     NSpace: typeof import('naive-ui')['NSpace']
     NText: typeof import('naive-ui')['NText']
+    ResizeBox: typeof import('./src/components/resize-box/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ScrollText: typeof import('./src/components/scroll-text/index.vue')['default']

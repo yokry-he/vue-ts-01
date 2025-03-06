@@ -6,7 +6,17 @@ export const routes = [
     name: "profile",
     component: () => import("@views/profile/index.vue"),
   },
-  { path: "/", redirect: "profile" },
+  {
+    path: "/drag-temp",
+    name: "drag-temp",
+    component: () => import("@comps/drag-temp/index.vue"),
+  },
+  {
+    path: "/free-layout",
+    name: "free-layout",
+    component: () => import("@comps/free-layout/index.vue"),
+  },
+  { path: "/", redirect: "/free-layout" },
 ];
 
 const router: Router = createRouter({

@@ -67,8 +67,6 @@ const rgb2Bg = computed(() => {
   return rgbToHsl(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`)?.toRgbaString();
 });
 
-
-
 function onAvatarClick() {
   visible.value = true;
 }
@@ -83,7 +81,6 @@ function onAvatarClick() {
 }
 
 .yok-avatar {
-
   img {
     vertical-align: middle;
   }

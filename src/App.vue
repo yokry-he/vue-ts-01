@@ -2,8 +2,8 @@
   <router-view></router-view>
 </template>
 <script setup lang="ts">
-// console.log('process.env: ', process.env.NODE_ENV); // process.env:  development
-// console.log('import.meta: ', import.meta.env)
+console.log('process.env: ', process.env.NODE_ENV); // process.env:  development
+console.log('import.meta: ', import.meta.env)
 /**
  * {
     "APP_API": "https://dev/api",
