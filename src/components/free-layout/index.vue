@@ -1,7 +1,7 @@
 <template>
     <table class="yk-free-layout" :style="{ borderSpacing: borderSpacing }">
-        <tr class="yk-free-layout-tr" v-for="row in tableRenderData" :key="row._key">
-            <td class="yk-free-layout-td" v-for="col in row.cols.filter(item => item._show)" :key="col._key" :rowspan="col.rowspan" :colspan="col.colspan">
+        <tr class="yk-free-layout-tr" v-for="(rowTds, index) in tableRenderData" :key="'row:' + index">
+            <td class="yk-free-layout-td" v-for="col in rowTds.filter(item => item._show)" :key="col._key" :rowspan="col.rowspan" :colspan="col.colspan">
                 <div class="yk-free-layout-td-wrapper">
                     <div class="yk-free-layout-td-toolbar">
                         <div class="label">行：</div>
@@ -58,21 +58,19 @@ watch(props.rowNum, (newVal, oldVal) => {
 function generateTableData () {
     tableRenderData.length = 0
     for (const row of createArrayWithNum(props.rowNum)) {
-        const rowData = reactive({
-            _rowIndex: row - 1,
-            _key: row - 1,
-            cols: reactive([])
-        })
+        const rowData = reactive([])
         for (const col of createArrayWithNum(props.colNum)) {
-            rowData.cols.push(reactive({
-                _rowIndex: row - 1,
-                _colIndex: col - 1,
-                _rowspanMax: props.rowNum - (row - 1), // 行最大允许合并数
-                _colspanMax: props.colNum - (col - 1), // 列最大允许合并数
-                _key: `${row - 1}::${col - 1}`,
+            rowData.push(reactive({
+                _rowIndex: row,
+                _colIndex: col,
+                _rowspanMax: props.rowNum - row, // 行最大允许合并数
+                _colspanMax: props.colNum - col, // 列最大允许合并数
+                _key: `${row}::${col}`,
                 _show: true,
                 rowspan: 1,
+                oldRowspan: 1,
                 colspan: 1,
+                oldColspan: 1,
                 component: {},
             }))
         }
@@ -87,24 +85,58 @@ function rowspanChange (val, col) {
 function colspanChange (val, col) {
     spanDataHandler(val, col, 'col')
 }
-// 合并数据处理
-function spanDataHandler (val, col, type) {
+/**
+ * 合并数据处理
+ * @param {*} val 合并的行数或者列数
+ * @param {*} cell 当前合并数据改变的 单元格 的数据
+ * @param {*} type  区分行改变还是列改变 行改变为 row，列改变为 col
+ */
+function spanDataHandler (val, cell, type) {
     if (val === '' || isNaN(parseInt(val))) {
         return
     }
     const maxSpanKey = type === 'row' ? '_rowspanMax' : '_colspanMax'
     const spanKey = type === 'row' ? 'rowspan' : 'colspan'
+    const oldSpankey = type === 'row' ? 'oldRowspan' : 'oldColspan'
     // 如果大于当前位置可合并的最大值，则自动置为当前允许最大值
     val = parseInt(val) <= 1 ? 1 : val
-    const oldSpanVal = col[spankey]
-    const newSpanVal = Math.min(col[maxSpanKey], val)
-    col[spanKey] = newSpanVal
-    const cValArr = createArrayWithNum(newSpanVal - oldSpanVal)
+    const newSpanVal = Math.min(cell[maxSpanKey], val)
+    console.log('newSpanVal: ', newSpanVal);
+    cell[spanKey] = newSpanVal
+    // 如果合并数据没有变化，则不处理
+    if (cell[spanKey] === cell[oldSpankey]) {
+        return
+    }
     
+    // 差异数据处理
+    const oldSpanVal = cell[oldSpankey] || 1
+    const spanDiff = newSpanVal - oldSpanVal
+    const spanAbsDiff = Math.abs(spanDiff)
+    const flag = spanDiff < 0
+    const effectRowIndexArr = createArrayWithNum(type === 'row' ? spanAbsDiff : cell.rowspan) 
+    const effectColIndexArr = createArrayWithNum(type === 'row' ? cell.colspan: spanAbsDiff)
+    console.log(type + ' effectColIndexArr : ', effectColIndexArr);
+    console.log(type + ' effectRowIndexArr : ', effectRowIndexArr);
+    console.log(type + ' spanDiff : ', spanDiff);
+    console.log(type + ' spanAbsDiff : ', spanAbsDiff);
+    effectRowIndexArr.forEach(index => {
+        const rowNum = type === 'row' ? (cell._rowIndex + Math.min(newSpanVal, oldSpanVal) - 1 + index) : (cell._rowIndex + index)
+        console.log(type + ' rowNum : ', rowNum);
+        const trData = tableRenderData[rowNum]
+        effectColIndexArr.forEach(index2 => {
+            const colNum = type === 'row' ? (cell._colIndex + index2) : (cell._colIndex + Math.min(newSpanVal, oldSpanVal) - 1 + index2)
+            console.log(type + ' colNum : ', colNum);
+            const tdData = trData[colNum]
+            tdData._show = flag
+        })
+    })
+    // 记录上次行或者列合并的数据
+    cell[oldSpankey] = cell[spanKey]
 }
 // 根据数字创建数组  入参 5 返回 [1,2,3,4,5]
 function createArrayWithNum (n) {
-    return Array.from({length: n}, (_, index) => index + 1)
+    n = Math.max(n, 1)
+    return Array.from({length: n}, (_, index) => index)
 }
 
 
