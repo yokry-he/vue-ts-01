@@ -25,6 +25,18 @@ div {
   box-sizing: border-box;
 }
 
+/* 隐藏所有现代浏览器中的数字加减按钮 */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #app {
   width: 100%;
   height: 100%;
