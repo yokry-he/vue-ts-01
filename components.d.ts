@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CodeEditor: typeof import('./src/components/code-editor/index.vue')['default']
     DragCard: typeof import('./src/components/drag-temp/drag-card.vue')['default']
     DragTemp: typeof import('./src/components/drag-temp/index.vue')['default']
     Drawer: typeof import('./src/components/drawer/index.vue')['default']

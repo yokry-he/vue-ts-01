@@ -229,7 +229,7 @@ function handleSelectionArea() {
     if (!mergedFirstData._show) {
         mergedFirstData = getTdDataByKey(firstTdData._mergedKey)
     }
-    if (mergedFirstData.colspan >= colspan && mergedFirstData.rowspan >= rowspan) {
+    if (mergedFirstData._colIndex + mergedFirstData.colspan >= firstTdData.colIndex + colspan && mergedFirstData._rowIndex + mergedFirstData.rowspan >= firstTdData.rowIndex + rowspan) {
         return
     }
     // 获取最后一个单元格数据

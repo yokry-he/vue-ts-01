@@ -7,6 +7,11 @@ export const routes = [
     component: () => import("@views/profile/index.vue"),
   },
   {
+    path: "/async-comp",
+    name: "async-comp",
+    component: () => import("@views/async-comp/index.vue"),
+  },
+  {
     path: "/drag-temp",
     name: "drag-temp",
     component: () => import("@comps/drag-temp/index.vue"),

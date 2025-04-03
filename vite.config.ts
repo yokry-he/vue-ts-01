@@ -36,6 +36,9 @@ export default defineConfig(({command, mode, ssrBuild, ...others}) => {
     envDir: getPath('./env-config'),
     envPrefix: ['VITE', 'APP'],
     // publicDir: 'public', // 指定public文件文件夹，该文件夹下的资源会被原封不动的移动到打包后的项目根目录下
+    define: {
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false), // 关闭模板编译警告
+    },
     resolve: {
       alias: {
         '@': getPath('./src'),
